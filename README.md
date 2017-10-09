@@ -1,7 +1,7 @@
 # MIDI_recorder
  :notes: MIDI recorder (support application for the [CodeKlavier](https://codeklavier.space) research phase)
 
-##instructions
+## instructions
 
 - make sure you have python3 installed
 - pip3 install rtmidi
@@ -11,4 +11,4 @@
 
 `python3 recorder.py`
 
-CodeKlavier is developed thanks to the support of **Stimuleringsfonds Creatieve Industrie** 
+CodeKlavier is developed thanks to the support of **Stimuleringsfonds Creatieve Industrie**
