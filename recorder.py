@@ -29,6 +29,7 @@ track = MidiTrack()
 mid.tracks.append(track)
 
 # record
+#TODO: send this class to a module:
 class CK_rec(object):
     def __init__(self, port):
         self.port = port
