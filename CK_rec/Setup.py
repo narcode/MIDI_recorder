@@ -9,20 +9,30 @@ class Setup(object):
         self.__ports = self.__midiin.get_ports()
         self.__ports_out = self.__midiout.get_ports()
 
-    def print_name(self, length, lines):
+    def print_lines(self, length, lines):
         for i in range(1, lines):
             num = length+(1)
             print('##'*num)
             time.sleep(0.2)
 
     def print_welcome(self, length):
-        for i in range(1, 5):
-            num = length+(1)
-            print('##'*num)
-            #TODO: add codeKlavier logo
+        print('');
+        for i in range(1, 6):
+            string = "####"
+            space = " ";
+            if i == 1:
+                print(string[:4] + space + string[:1] + space*2 + string[:1] + space*4 + string[:4] + space + string[:4] + space + string[:4])
+            elif i == 2:
+                print(string[:1] + space*4 + string[:1] + space + string[:1] + space*5 + string[:1] + space*2 + string[:1] + space + string[:1] + space*4 + string[:1])
+            elif i == 3:
+                print(string[:1] + space*4 + string[:2]+ space*6 + string[:4] + space + string[:4] + space + string[:1])
+            elif i == 4:
+                print(string[:1] + space*4 + string[:1] + space + string[:1] + space*5 + string[:1] + space + string[:1] + space*2 + string[:1] + space*4 + string[:1])
+            elif i == 5:
+                print(string[:4] + space + string[:1] + space*2 + string[:1] + space*4 + string[:1] + space*2 + string[:1] + space + string[:4] + space + string[:4])
             time.sleep(0.2)
 
-        print("\nWelcome to the Codeklavier!\n")
+        print("\nWelcome to the Codeklavier MIDI Recorder!\n")
 
     def show_ports(self):
         print("These are your detected MIDI devices:", '\n')
@@ -91,7 +101,7 @@ class Setup(object):
         return myPort
 
     def end(self):
-        print("Bye bye from CodeKlavier setup :(")
+        print("Bye bye from CodeKlavier Recorder! see you next time 🎹")
         self.close_port()
         del self.__midiin
 
@@ -101,7 +111,7 @@ def main():
     codeK.open_port(my_midiport)
 
     if my_midiport >= 0:
-        print("CodeKlavier is ON. Press Control-C to exit.")
+        print("CodeKlavier is ON. Showing incoming MIDI messages. Press Control-C to exit.")
         try:
             timer = time.time()
             while True:
