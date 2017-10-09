@@ -1,4 +1,4 @@
-# MIDI_recorder
+# Simple MIDI Recorder
  :notes: MIDI recorder (support program for the [CodeKlavier](https://codeklavier.space) research phase)
 
 ## instructions
