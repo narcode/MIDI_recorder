@@ -1,5 +1,5 @@
 # MIDI_recorder
- :notes: MIDI recorder (support application for the [CodeKlavier](https://codeklavier.space) research phase)
+ :notes: MIDI recorder (support program for the [CodeKlavier](https://codeklavier.space) research phase)
 
 ## instructions
 
