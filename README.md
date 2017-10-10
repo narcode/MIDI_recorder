@@ -1,5 +1,7 @@
 # Simple MIDI Recorder
- :notes: MIDI recorder (support program for the [CodeKlavier](https://codeklavier.space) research phase)
+ :notes: MIDI recorder tool. Record and save a stream of midi input as a midi file.
+
+###### (Developed as a support tool for the [CodeKlavier](https://codeklavier.space))
 
 ## instructions
 
@@ -7,7 +9,7 @@
 - pip3 install rtmidi
 - pip3 install mido
 
-###### then simply run in terminal:
+## then simply run in terminal:
 
 `python3 recorder.py`
 
