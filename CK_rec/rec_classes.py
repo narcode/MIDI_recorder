@@ -1,13 +1,7 @@
 import mido
 from mido import Message, MidiFile, MidiTrack
 
-# Classes for handling the recording
-
-# Start the recorder
-# mid = MidiFile()
-# track = MidiTrack()
-mid.tracks.append(track)
-
+# Class for handling the recording
 class CK_rec(object):
     def __init__(self, port):
         self.port = port
