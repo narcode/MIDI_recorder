@@ -101,7 +101,7 @@ class Setup(object):
         return myPort
 
     def end(self):
-        print("Bye bye from CodeKlavier Recorder! see you next time 🎹")
+        print("Bye bye from CodeKlavier Recorder! see you next time 🎹\n")
         self.close_port()
         del self.__midiin
 

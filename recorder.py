@@ -11,9 +11,6 @@ from CK_rec.setup import Setup
 from CK_rec.rec_classes import CK_rec
 
 
-#mode
-debug = True
-
 # Start the Device
 codeK = Setup()
 myPort = codeK.perform_setup()
@@ -21,9 +18,10 @@ codeK.open_port(myPort)
 on_id = codeK.get_device_id()
 print('your note on id is: ', on_id, '\n')
 
-
 # record
-codeK.set_callback(CK_rec(myPort, 120))
+midiRec = CK_rec(myPort, on_id)
+codeK.set_callback(midiRec)
+
 
 # Loop to program to keep listening for midi input
 try:
@@ -32,6 +30,6 @@ try:
 except KeyboardInterrupt:
     print('')
 finally:
-    name = input('save midi recording as: ')
-    CK_rec.saveTrack(name)
+    name = input('\nsave midi recording as? : ')
+    midiRec.saveTrack(name)
     codeK.end()
