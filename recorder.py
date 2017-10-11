@@ -23,7 +23,7 @@ print('your note on id is: ', on_id, '\n')
 
 
 # record
-codeK.set_callback(CK_rec(myPort))
+codeK.set_callback(CK_rec(myPort, 120))
 
 # Loop to program to keep listening for midi input
 try:

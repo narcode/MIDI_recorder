@@ -21,7 +21,7 @@ class CK_rec(object):
         print("\nPress Control-C to stop the recording.")
         self.__mid.tracks.append(self.__track)
 
-    def __call__(self, event, data=None, tempo):
+    def __call__(self, event,tempo, data=None):
         self.prepareTrack()
         message, deltatime = event
         if message:
