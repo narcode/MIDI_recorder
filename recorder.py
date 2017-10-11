@@ -16,7 +16,7 @@ codeK = Setup()
 myPort = codeK.perform_setup()
 codeK.open_port(myPort)
 on_id = codeK.get_device_id()
-print('your note on id is: ', on_id, '\n')
+print('your note on id is: ', on_id)
 
 # record
 midiRec = CK_rec(myPort, on_id)

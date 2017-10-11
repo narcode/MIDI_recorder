@@ -20,10 +20,9 @@ class CK_rec(object):
         self.prepareTrack()
 
     def prepareTrack(self):
-        print("\nCodeKlavier is ready and ON.")
         input("Press [ENTER] to start recording...")
-        print("You are now RECORDING")
-        print("\nPress Control-C to stop the recording.\n")
+        print("\n**** 📹 You are now RECORDING *****")
+        print("(Press Control-C to stop the recording)\n")
         self.__mid.tracks.append(self.__track)
 
     def __call__(self, event, data=None):
