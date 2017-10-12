@@ -6,7 +6,7 @@
 ## instructions
 
 - make sure you have python3 installed
-- pip3 install rtmidi
+- pip3 install python-rtmidi
 - pip3 install mido
 
 ## then simply run in terminal:
