@@ -62,6 +62,8 @@ class Setup(object):
         if self.__ports:
             #TODO: do we need to check on the existence of ports?
             self.__midiin.open_port(pnum)
+            # ignore sysex, timing and active sense messages
+            self.__midiin.ignore_types(True, True, False)
         else:
             raise Exception("No midi ports! Maybe open a virtual device?")
 
@@ -90,9 +92,10 @@ class Setup(object):
             msg = self.get_message()
             if msg:
                 message, deltatime = msg
-                device_id = message[0]
-                if device_id:
-                    return device_id
+                if message[0] != 254: #active sense ignore
+                    device_id = message[0]
+                    if device_id:
+                        return device_id
 
     def perform_setup(self):
         self.print_welcome(20)

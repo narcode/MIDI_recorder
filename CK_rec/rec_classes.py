@@ -18,6 +18,7 @@ class CK_rec(object):
         self.__mid = MidiFile()
         self.__track = MidiTrack()
         self.prepareTrack()
+        self.__activesense = 0
 
     def prepareTrack(self):
         input("Press [ENTER] to start recording...")
@@ -27,15 +28,21 @@ class CK_rec(object):
 
     def __call__(self, event, data=None):
         message, deltatime = event
-        if message:
-            miditime = int(round(mido.second2tick(deltatime, self.__mid.ticks_per_beat, mido.bpm2tempo(self.tempo))))
+        # if message[0] == 254:  #compensate for active sense delta times
+        self.__activesense += deltatime
+        # else:
+        #     self.__activesense = deltatime
+        if message[0] != 254: #ignore active sense
+            miditime = int(round(mido.second2tick(self.__activesense, self.__mid.ticks_per_beat, mido.bpm2tempo(self.tempo))))
             if self.debug:
-                print('deltatime: ', deltatime, 'msg: ', message)
+                print('deltatime: ', deltatime, 'msg: ', message, 'activecomp: ', self.__activesense)
             if message[0] == self.on_id:
                 self.__track.append(Message('note_on', note=message[1], velocity=message[2], time=miditime))
+                self.__activesense = 0
             else:
                 # print("note off!")
                 self.__track.append(Message('note_off', note=message[1], velocity=message[2], time=miditime))
+                self.__activesense = 0
 
     def saveTrack(self, name):
         self.__mid.save('Recordings/'+name+'.mid')
