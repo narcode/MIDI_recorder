@@ -9,6 +9,8 @@
 - pip3 install python-rtmidi
 - pip3 install mido
 
+Or use pip3 to install the dependencies with ``pip3 install -r requirements.txt``.
+
 ## then simply run in terminal:
 
 `python3 recorder.py`
