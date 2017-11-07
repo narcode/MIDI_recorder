@@ -30,6 +30,7 @@ try:
 except KeyboardInterrupt:
     print('')
 finally:
-    name = input('\nsave midi recording as? : ')
-    midiRec.saveTrack(name)
+    name = input('\nsave midi recording as? (leaving the name blank discards the recording): ')
+    if name != "":
+        midiRec.saveTrack(name)
     codeK.end()
