@@ -9,7 +9,7 @@ codeK = Setup()
 myPort = codeK.perform_setup()
 codeK.open_port(myPort)
 on_id = codeK.get_device_id()
-print('your note on id is: ', on_id)
+print("your note on id is: ", on_id)
 
 # record
 midiRec = CK_rec(myPort, on_id)
@@ -20,9 +20,9 @@ try:
     while True:
         time.sleep(0.001)
 except KeyboardInterrupt:
-    print('')
+    print("")
 finally:
-    name = input('\nsave midi recording as? : ')
+    name = input("\nsave midi recording as? : ")
     if (name != ""):
         midiRec.saveTrack(name)
     codeK.end()

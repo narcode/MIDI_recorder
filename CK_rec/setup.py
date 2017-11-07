@@ -17,7 +17,7 @@ class Setup:
         """Prints welcome message
         """
 
-        print('');
+        print("");
         for i in range(1, 6):
             string = "####"
             space = " ";
@@ -47,7 +47,7 @@ class Setup:
     def show_ports(self):
         """Prints the available midi ports.
         """
-        print("These are your detected MIDI devices:", '\n')
+        print("These are your detected MIDI devices:", "\n")
         for port in self._ports:
             print(self._ports.index(port), " -> ", port)
 
@@ -72,7 +72,7 @@ class Setup:
                 else:
                     return selected_midiport
             except KeyboardInterrupt:
-                print('\n', "You want to quit? ¯\('…')/¯  ok, Bye bye.")
+                print("\n", "You want to quit? ¯\('…')/¯  ok, Bye bye.")
                 exit()
             except ValueError:
                 print("Sorry, type a valid port numer!")
@@ -184,12 +184,12 @@ def main():
 
                 if msg:
                     message, deltatime = msg
-                    print('deltatime: ', deltatime, 'msg: ', message)
+                    print("deltatime: ", deltatime, "msg: ", message)
 
                 time.sleep(0.01)
 
         except KeyboardInterrupt:
-            print('')
+            print("")
         finally:
             codeK.end()
 

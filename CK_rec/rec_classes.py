@@ -50,26 +50,26 @@ class CK_rec(object):
                                  self._mid.ticks_per_beat,
                                  mido.bpm2tempo(self.tempo)))
             if self.debug:
-                print('deltatime: {0:.3f}, msg: {1}, activecomp: {2:.3f}'\
+                print("deltatime: {0:.3f}, msg: {1}, activecomp: {2:.3f}"\
                     .format(deltatime, message, self._activesense))
 
             if message[0] == self.on_id:
                 self._track.append(Message(
-                            'note_on',
+                            "note_on",
                             note=message[1],
                             velocity=message[2],
                             time=miditime))
                 self._activesense = 0
             elif message[0] == 176:
                 self._track.append(Message(
-                            'control_change',
+                            "control_change",
                             channel=1,
                             control=message[1],
                             value=message[2],
                             time=miditime))
             else:
                 self._track.append(Message(
-                            'note_off',
+                            "note_off",
                             note=message[1],
                             velocity=message[2],
                             time=miditime))
@@ -80,5 +80,5 @@ class CK_rec(object):
 
         :param str name: filename to save the track to
         """
-        self._mid.save('Recordings/' + name + '.mid')
+        self._mid.save("Recordings/" + name + ".mid")
         print("\nRecording saved as: Recordings/" + name + ".mid\n")
