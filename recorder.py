@@ -52,7 +52,7 @@ finally:
     try:
         name = outfile_settings.get("filename")
     except KeyError:
-        name = input("\nsave midi recording as? : ")
+        name = input('\nsave midi recording as? (leaving the name blank discards the recording): ')
     if (name != ""):
         midiRec.saveTrack(name)
     codeK.end()
