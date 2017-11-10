@@ -150,12 +150,11 @@ class Setup:
     def perform_setup(self):
         """Perform the setup
 
-        Prints the welcome mesaage, get the user to select a midi input port.
+        Get the user to select a midi input port.
 
         :return: the selected midi input port
         :rtype: int
         """
-        self.print_welcome()
         self.show_ports()
         myPort = self.get_port_from_user()
         return myPort
