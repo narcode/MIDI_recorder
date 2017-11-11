@@ -77,6 +77,23 @@ class Display:
 
 def main():
     """Run method for testing
+
+    This doesn't record anything, just testing the display. It should print
+    something like (depending on the settings):
+    
+    1    5    10   11   15   20   25
+    |____|____|____|____|____|____|
+              
+      x      
+      x x    
+        x    
+      x x    
+   x xxxx x  
+              
+     ____ ____ ____ ____ ____ ____
+    |    |    |    |    |    |    |
+    1    5    10   11   15   20   25
+
     """
     display = Display()
     display.print_header()
