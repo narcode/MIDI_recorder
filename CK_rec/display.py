@@ -1,5 +1,7 @@
 class Display:
-
+    """TODO: WRITE DOCSTRING
+    """
+    
     notes_playing = []
     MAX_MIDI_NOTES = 10 #should be 128 ??
     
@@ -18,6 +20,7 @@ class Display:
         :param int midinumber: the midi not number to check
         :return boolean: True if succesful
         """
+        #TODO: is 0 allowed?
         if (midinumber < 0 and midinumber >self.MAX_MIDI_NOTES):
             raise  TypeError("Invalid midi number")
         return True
@@ -44,10 +47,28 @@ class Display:
         buildstring = [self.NOTE_ON_SYMBOL if x else self.NOTE_OFF_SYMBOL for x in self.notes_playing]
         print("".join(buildstring))
 
+    def print_header(self):
+        """Print a header line
+
+        This should help you to navigate between midinumbers
+        """
+        print("1    5    10   11   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  125  130  135  140  145  150")
+        print("|____|____|____|____|____|____|____|____|____|____|____|____|____|____|____|____|____|____|____|____|____|____|____|____|____|____|____|____|____|____|____|")
+
+    def print_footer(self):
+        """Print a footer line
+
+        This should help you to navigate between midinumbers
+        """
+        print(" ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ")
+        print("|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |")
+        print("1    5    10   11   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  125  130  135  140  145  150")
+
 def main():
     """Run method for testing
     """
     display = Display()
+    display.print_header()
     display.print_line()
     display.note_on(3)
     display.print_line()
@@ -69,6 +90,7 @@ def main():
     display.note_off(7)
     display.note_off(4)
     display.print_line()
+    display.print_footer()
 
 if __name__ == "__main__":
     main()
