@@ -10,21 +10,15 @@ from CK_rec.rec_classes import CK_rec
 #get config
 config = configparser.ConfigParser()
 config.read("midirecorder_settings.ini")
-try:
-    midi_settings = config["midi_settings"]
-except KeyError:
-    print("No midi settings in ini file.")
-    midi_settings = {}
-try:
-    outfile_settings = config["outfile_settings"]
-except KeyError:
-    print("No outfile settings in ini file.")
-    outfile_settings = {}
-try:
-    recorder_settings = config["recorder"]
-except KeyError:
-    print("No recorder settings in ini file.")
-    recorder_settings = {}
+if (not config.has_section("midi_settings")):
+    config.add_section('midi_settings')
+if (not config.has_section("outfile_settings")):
+    config.add_section('outfile_settings')
+if (not config.has_section("recorder_settings")):
+    config.add_section('recorder_settings')
+midi_settings = config["midi_settings"]
+outfile_settings = config["outfile_settings"]
+recorder_settings = config["recorder_settings"]
 
 debug = recorder_settings.getboolean("debug", False)
 
@@ -33,14 +27,14 @@ codeK = Setup()
 codeK.print_welcome()
 try:
     myPort = int(midi_settings.get("port"))
-except KeyError:
+except (KeyError, TypeError) as e:
     myPort = codeK.perform_setup()
 
 codeK.open_port(myPort)
 
 try:
     on_id = int(midi_settings.get("device_id"))
-except KeyError:
+except (KeyError, TypeError) as e:
     on_id = codeK.get_device_id()
 
 print("your note on id is: ", on_id)
@@ -59,7 +53,7 @@ except KeyboardInterrupt:
 finally:
     try:
         name = outfile_settings.get("filename")
-    except KeyError:
+    except (KeyError, TypeError) as e:
         name = input('\nsave midi recording as? (leaving the name blank discards the recording): ')
     if (name != ""):
         midiRec.saveTrack(name)
