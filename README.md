@@ -21,8 +21,9 @@ Run the python code via:
 ## using your own settings
 
 The midi recoder loads the setrings from the ``midirecorder_settings.ini`` file.
-You can edit this file according to your needs. There are three sections with
-settings you can adjust: 'recorder', 'midi_settings' and 'outfile_settings'.
+You can edit this file according to your needs. There are four sections with
+settings you can adjust: 'recorder', 'midi_settings', 'outfile_settings', and 
+'display_settings'.
 
 ### Recorder
 
@@ -41,6 +42,12 @@ optional: if you leave it out, the script will ask you for these settings.
 You can specify the filename of the recoding. This section is optional. If you
 leave it out: the program will ask you for a filename. If you leave it out: no
 recording is saved.
+
+### display_settings
+
+Enter the symbols for note_on and note_off that you want to use for displaying
+your recording on the screen. This section is optional. Defaults are 'x' en ' '
+(space).
 
 # Support
 

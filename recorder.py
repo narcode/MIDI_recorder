@@ -13,14 +13,19 @@ config.read("midirecorder_settings.ini")
 if (not config.has_section("midi_settings")):
     config.add_section('midi_settings')
 if (not config.has_section("outfile_settings")):
-    config.add_section('outfile_settings')
+    config.add_section("outfile_settings")
 if (not config.has_section("recorder_settings")):
-    config.add_section('recorder_settings')
+    config.add_section("recorder_settings")
+if (not config.has_section("display_settings")):
+    config.add_section("display_settings")
 midi_settings = config["midi_settings"]
 outfile_settings = config["outfile_settings"]
 recorder_settings = config["recorder_settings"]
+display_settings = config["display_settings"]
 
 debug = recorder_settings.getboolean("debug", False)
+display_note_on_symbol = display_settings.get("note_on_symbol", "x")
+display_note_off_symbol = display_settings.get("note_off_symbol", " ")
 
 # Start the Device
 codeK = Setup()
@@ -40,7 +45,11 @@ except (KeyError, TypeError) as e:
 print("your note on id is: ", on_id)
 
 # record
-midiRec = CK_rec(myPort, on_id, debug=debug)
+midiRec = CK_rec(myPort, \
+                 on_id, \
+                 display_note_on_symbol = display_note_on_symbol, \
+                 display_note_off_symbol=display_note_off_symbol, \
+                 debug=debug)
 codeK.set_callback(midiRec)
 
 # Loop to program to keep listening for midi input

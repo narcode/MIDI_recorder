@@ -28,13 +28,11 @@ class Display:
     notes_playing = []     #array to track midi notes with on/off value
     MAX_MIDI_NOTES = 10    #should be 128 ?? number of midi notes available
     
-    #TODO: move to settings-file?
-    NOTE_ON_SYMBOL = "x"   #print symbol for notes 'on'
-    NOTE_OFF_SYMBOL = " "  #print symbol for notes 'off'
-    
-    def __init__(self):
+    def __init__(self, note_on_symbol="x", note_off_symbol=" "):
         """Initialise the class and set variables.
         """
+        self._note_on_symbol = note_on_symbol
+        self._note_off_symbol = note_off_symbol
         self.notes_playing = [False for x in range(0,self.MAX_MIDI_NOTES)]
 
     def _check_note_range(self, midinumber):
@@ -67,7 +65,7 @@ class Display:
     def print_line(self):
         """Print a single line with the midi notes
         """
-        buildstring = [self.NOTE_ON_SYMBOL if x else self.NOTE_OFF_SYMBOL
+        buildstring = [self._note_on_symbol if x else self._note_off_symbol
                         for x in self.notes_playing]
         print("".join(buildstring))
 

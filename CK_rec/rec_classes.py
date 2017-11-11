@@ -13,11 +13,19 @@ class CK_rec(object):
     @debug is for posting messages on console or not
     """
 
-    def __init__(self, port, device_id, tempo=120, debug=True):
+    def __init__(self, \
+                 port, \
+                 device_id, \
+                 display_note_on_symbol='x', \
+                 display_note_off_symbol=' ', \
+                 tempo=120, \
+                 debug=True):
         """Initialise the class and set class variables.
 
         :param int port: the midi input port numer
         :param int device_id: the midi device id
+        :param str display_note_on_symbol: symbol to use for display (note on)
+        :param str display_note_off_symbol: symbol to use for display (note off)
         :param int tempo: bmp tempo for midi recording (default: 120)
         :param bool debug: run in debug mode (default: True)
         """
@@ -29,7 +37,7 @@ class CK_rec(object):
         self._track = MidiTrack()
         self.prepareTrack()
         self._activesense = 0
-        self.display = Display()
+        self.display = Display(display_note_on_symbol, display_note_off_symbol)
 
     def prepareTrack(self):
         """Show welcome message and append a trak to the tracklist.
