@@ -34,10 +34,10 @@ class CK_rec(object):
         self.debug = debug
         self.on_id = device_id
         self._mid = MidiFile()
+        self.display = Display(display_note_on_symbol, display_note_off_symbol)
         self._track = MidiTrack()
         self.prepareTrack()
         self._activesense = 0
-        self.display = Display(display_note_on_symbol, display_note_off_symbol)
 
     def prepareTrack(self):
         """Show welcome message and append a trak to the tracklist.
@@ -98,6 +98,11 @@ class CK_rec(object):
         """Print the footer of the display.
         """
         self.display.print_footer()
+
+    def update_display(self):
+        """Update the display to print the "on"-notes.
+        """
+        self.display.print_line()
 
     def saveTrack(self, name):
         """Save the recording as a midi track (.mid file extension)

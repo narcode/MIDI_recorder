@@ -54,6 +54,7 @@ codeK.set_callback(midiRec)
 
 # Loop to program to keep listening for midi input
 try:
+    i = 0
     while True:
         time.sleep(0.001)
         #only update the screen every 100 cycles
@@ -62,8 +63,8 @@ try:
             i = -1
         i += 1
 except KeyboardInterrupt:
-    midiRec.print_display_footer()
     print("")
+    midiRec.print_display_footer()
 finally:
     try:
         name = outfile_settings.get("filename")
