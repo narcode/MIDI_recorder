@@ -47,6 +47,11 @@ codeK.set_callback(midiRec)
 try:
     while True:
         time.sleep(0.001)
+        #only update the screen every 100 cycles
+        if i >= 100:
+            midiRec.update_display()
+            i = -1
+        i += 1
 except KeyboardInterrupt:
     midiRec.print_display_footer()
     print("")
