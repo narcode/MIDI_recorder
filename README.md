@@ -45,7 +45,7 @@ recording is saved.
 
 ### display_settings
 
-Enter the symbols for note_on and note_off that you want to use for displaying
+Adjust the speed the display updates. Enter the symbols for note_on and note_off that you want to use for displaying
 your recording on the screen. This section is optional. Defaults are 'x' en ' '
 (space).
 

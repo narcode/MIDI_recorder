@@ -14,18 +14,29 @@ if (not config.has_section("midi_settings")):
     config.add_section('midi_settings')
 if (not config.has_section("outfile_settings")):
     config.add_section("outfile_settings")
-if (not config.has_section("recorder_settings")):
-    config.add_section("recorder_settings")
+if (not config.has_section("recorder")):
+    config.add_section("recorder")
 if (not config.has_section("display_settings")):
     config.add_section("display_settings")
 midi_settings = config["midi_settings"]
 outfile_settings = config["outfile_settings"]
-recorder_settings = config["recorder_settings"]
+recorder_settings = config["recorder"]
 display_settings = config["display_settings"]
+
+display_speed_options = {
+    "fastest": 15,
+    "faster": 30,
+    "fast": 45,
+    "medium": 60,
+    "slow": 75,
+    "slower": 90,
+    "slowest": 105}
 
 debug = recorder_settings.getboolean("debug", False)
 display_note_on_symbol = display_settings.get("note_on_symbol", "x")
 display_note_off_symbol = display_settings.get("note_off_symbol", " ")
+display_speed = display_speed_options.get(
+    display_settings.get("speed", "medium"))
 
 # Start the Device
 codeK = Setup()
@@ -57,8 +68,7 @@ try:
     i = 0
     while True:
         time.sleep(0.001)
-        #only update the screen every 100 cycles
-        if i >= 100:
+        if i >= display_speed:
             midiRec.update_display()
             i = -1
         i += 1
