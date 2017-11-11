@@ -20,6 +20,13 @@ try:
 except KeyError:
     print("No outfile settings in ini file.")
     outfile_settings = {}
+try:
+    recorder_settings = config["recorder"]
+except KeyError:
+    print("No recorder settings in ini file.")
+    recorder_settings = {}
+
+debug = recorder_settings.getboolean("debug", False)
 
 # Start the Device
 codeK = Setup()
@@ -39,7 +46,7 @@ except KeyError:
 print("your note on id is: ", on_id)
 
 # record
-midiRec = CK_rec(myPort, on_id)
+midiRec = CK_rec(myPort, on_id, debug=debug)
 codeK.set_callback(midiRec)
 
 # Loop to program to keep listening for midi input
@@ -47,6 +54,7 @@ try:
     while True:
         time.sleep(0.001)
 except KeyboardInterrupt:
+    midiRec.print_display_footer()
     print("")
 finally:
     try:

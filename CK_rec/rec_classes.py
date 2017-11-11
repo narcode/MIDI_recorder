@@ -1,6 +1,8 @@
 import mido
 from mido import Message, MidiFile, MidiTrack
 
+from .display import Display
+
 class CK_rec(object):
     """Class for handling the recording
     
@@ -27,6 +29,7 @@ class CK_rec(object):
         self._track = MidiTrack()
         self.prepareTrack()
         self._activesense = 0
+        self.display = Display()
 
     def prepareTrack(self):
         """Show welcome message and append a trak to the tracklist.
@@ -34,12 +37,13 @@ class CK_rec(object):
         input("Press [ENTER] to start recording...")
         print("\n**** 📹 You are now RECORDING *****")
         print("(Press Control-C to stop the recording)\n")
+        self.display.print_header()
         self._mid.tracks.append(self._track)
 
     def __call__(self, event, data=None):
         """Deal with calling the midi event.
 
-        :param event: the midie event
+        :param event: the midi event
         :param data: ? (default: None)
         """
         message, deltatime = event
@@ -60,6 +64,7 @@ class CK_rec(object):
                             velocity=message[2],
                             time=miditime))
                 self._activesense = 0
+                self.display.note_on(message[1])
             elif message[0] == 176:
                 self._track.append(Message(
                             "control_change",
@@ -74,6 +79,17 @@ class CK_rec(object):
                             velocity=message[2],
                             time=miditime))
                 self._activesense = 0
+                self.display.note_off(message[1])
+
+    def print_active_notes(self):
+        """Use the display to print the active notes.
+        """
+        self.display.print_line()
+
+    def print_display_footer(self):
+        """Print the footer of the display.
+        """
+        self.display.print_footer()
 
     def saveTrack(self, name):
         """Save the recording as a midi track (.mid file extension)
