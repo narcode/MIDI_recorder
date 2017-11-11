@@ -1,21 +1,44 @@
 class Display:
-    """TODO: WRITE DOCSTRING
-    """
+    """The display class provides a clean output for the mdi signals.
     
-    notes_playing = []
-    MAX_MIDI_NOTES = 10 #should be 128 ??
+    The ``notes_playing`` keeps track of all the notes that are currently 'on'.
+    The ``print_line`` method will print a single line where the notes that are
+    'on' are highlighted with an 'x'. Notes that are 'off' are marked with a
+    normal space. By calling the ``print_line`` statement consecutive, you will
+    gather a lint of midi-music of what you are playing. **NOTE:** only the
+    note that are currently 'on' are printed, not the notes that fall between
+    the time steps of the update procedure. Increase the time resolution to fix
+    that.
+    
+    
+    The methods ``note_on`` and ``note_off`` record the changes of the midi
+    notes and they are set on the ``notes_playing`` variable. The method
+    ``print_line`` will print an overview of that variable on the screen. You
+    can obtain a ruler of the midi numbers with the ``print_header`` and
+    ``print_footer`` methods.
+    
+    
+    TODO:
+    * add color
+    
+    
+    Example: see the ``main`` method.
+    """
+
+    notes_playing = []     #array to track midi notes with on/off value
+    MAX_MIDI_NOTES = 10    #should be 128 ?? number of midi notes available
     
     #TODO: move to settings-file?
-    NOTE_ON_SYMBOL = "x"
-    NOTE_OFF_SYMBOL = " "
+    NOTE_ON_SYMBOL = "x"   #print symbol for notes 'on'
+    NOTE_OFF_SYMBOL = " "  #print symbol for notes 'off'
     
     def __init__(self):
-        """Initialise the class and set variables
+        """Initialise the class and set variables.
         """
         self.notes_playing = [False for x in range(0,self.MAX_MIDI_NOTES)]
 
     def _check_note_range(self, midinumber):
-        """Helper function to check if midinumber is valid
+        """Helper function to check if midinumber is valid.
         
         :param int midinumber: the midi not number to check
         :return boolean: True if succesful
@@ -26,7 +49,7 @@ class Display:
         return True
     
     def note_on(self, midinumber):
-        """Register the note with midinumber to on
+        """Register the note with midinumber to on.
         
         :param int midinumber: the midinumber of the note being played
         """
@@ -34,7 +57,7 @@ class Display:
         self.notes_playing[midinumber] = True
     
     def note_off(self, midinumber):
-        """Register the note with midinumber to off
+        """Register the note with midinumber to off.
         
         :param int midinumber: the midinumber of the note not played anymore
         """
@@ -49,9 +72,9 @@ class Display:
         print("".join(buildstring))
 
     def print_header(self):
-        """Print a header line
-
-        This should help you to navigate between midinumbers
+        """Print a header line.
+        
+        This should help you to navigate between midinumbers.
         """
         print("1    5    10   11   15   20   25   30   35   40   45   50   " \
              +"55   60   65   70   75   80   85   90   95   100  105  110  " \
@@ -61,9 +84,9 @@ class Display:
              +"|____|____|____|____|____|____|____|")
 
     def print_footer(self):
-        """Print a footer line
-
-        This should help you to navigate between midinumbers
+        """Print a footer line.
+        
+        This should help you to navigate between midinumbers.
         """
         print(" ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____" \
              +" ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____" \
@@ -77,23 +100,22 @@ class Display:
 
 def main():
     """Run method for testing
-
+    
     This doesn't record anything, just testing the display. It should print
     something like (depending on the settings):
     
-    1    5    10   11   15   20   25
-    |____|____|____|____|____|____|
-              
-      x      
-      x x    
-        x    
-      x x    
-   x xxxx x  
+     1    5    10   11   15   20   25
+     |____|____|____|____|____|____|
+               
+       x      
+       x x    
+         x    
+       x x    
+    x xxxx x  
               
      ____ ____ ____ ____ ____ ____
     |    |    |    |    |    |    |
     1    5    10   11   15   20   25
-
     """
     display = Display()
     display.print_header()
