@@ -33,6 +33,7 @@ display_speed_options = {
     "slowest": 105}
 
 debug = recorder_settings.getboolean("debug", False)
+display_on = display_settings.getboolean("display_on", True)
 display_note_on_symbol = display_settings.get("note_on_symbol", "x")
 display_note_off_symbol = display_settings.get("note_off_symbol", " ")
 display_speed = display_speed_options.get(
@@ -53,7 +54,16 @@ try:
 except (KeyError, TypeError) as e:
     on_id = codeK.get_device_id()
 
-print("your note on id is: ", on_id)
+print("your note on id is: ", on_id, "\n")
+
+if debug:
+    print("+------------------------------+")
+    print("| You are in DEBUG mode.       |")
+if not(display_on):
+    print("+------------------------------+")
+    print("| Display is OFF.              |")
+if(debug or not(display_on)):
+    print("+------------------------------+\n")
 
 # record
 midiRec = CK_rec(myPort, \
@@ -65,16 +75,19 @@ codeK.set_callback(midiRec)
 
 # Loop to program to keep listening for midi input
 try:
+    if display_on:
+        midiRec.print_display_header()
     i = 0
     while True:
         time.sleep(0.001)
-        if i >= display_speed:
+        if display_on and i >= display_speed:
             midiRec.update_display()
             i = -1
         i += 1
 except KeyboardInterrupt:
     print("")
-    midiRec.print_display_footer()
+    if display_on:
+        midiRec.print_display_footer()
 finally:
     try:
         name = outfile_settings.get("filename")

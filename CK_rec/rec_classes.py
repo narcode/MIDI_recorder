@@ -45,7 +45,6 @@ class CK_rec(object):
         input("Press [ENTER] to start recording...")
         print("\n**** 📹 You are now RECORDING *****")
         print("(Press Control-C to stop the recording)\n")
-        self.display.print_header()
         self._mid.tracks.append(self._track)
 
     def __call__(self, event, data=None):
@@ -89,10 +88,11 @@ class CK_rec(object):
                 self._activesense = 0
                 self.display.note_off(message[1])
 
-    def print_active_notes(self):
-        """Use the display to print the active notes.
+    ### Display wrapper functions ###
+    def print_display_header(self):
+        """Print the header of the display.
         """
-        self.display.print_line()
+        self.display.print_header()
 
     def print_display_footer(self):
         """Print the footer of the display.
@@ -104,6 +104,7 @@ class CK_rec(object):
         """
         self.display.print_line()
 
+    ### File IO ###
     def saveTrack(self, name):
         """Save the recording as a midi track (.mid file extension)
 
