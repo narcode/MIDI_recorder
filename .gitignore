@@ -102,3 +102,6 @@ ENV/
 
 # MIDI_recorder project specific
 Recordings/*.mid
+
+# mac
+.DS_Store

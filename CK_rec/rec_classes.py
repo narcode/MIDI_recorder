@@ -1,6 +1,8 @@
 import mido
 from mido import Message, MidiFile, MidiTrack
 
+from .display import Display
+
 class CK_rec(object):
     """Class for handling the recording
     
@@ -11,11 +13,19 @@ class CK_rec(object):
     @debug is for posting messages on console or not
     """
 
-    def __init__(self, port, device_id, tempo=120, debug=True):
+    def __init__(self, \
+                 port, \
+                 device_id, \
+                 display_note_on_symbol='x', \
+                 display_note_off_symbol=' ', \
+                 tempo=120, \
+                 debug=True):
         """Initialise the class and set class variables.
 
         :param int port: the midi input port numer
         :param int device_id: the midi device id
+        :param str display_note_on_symbol: symbol to use for display (note on)
+        :param str display_note_off_symbol: symbol to use for display (note off)
         :param int tempo: bmp tempo for midi recording (default: 120)
         :param bool debug: run in debug mode (default: True)
         """
@@ -24,6 +34,7 @@ class CK_rec(object):
         self.debug = debug
         self.on_id = device_id
         self._mid = MidiFile()
+        self.display = Display(display_note_on_symbol, display_note_off_symbol)
         self._track = MidiTrack()
         self.prepareTrack()
         self._activesense = 0
@@ -34,12 +45,13 @@ class CK_rec(object):
         input("Press [ENTER] to start recording...")
         print("\n**** 📹 You are now RECORDING *****")
         print("(Press Control-C to stop the recording)\n")
+        self.display.print_header()
         self._mid.tracks.append(self._track)
 
     def __call__(self, event, data=None):
         """Deal with calling the midi event.
 
-        :param event: the midie event
+        :param event: the midi event
         :param data: ? (default: None)
         """
         message, deltatime = event
@@ -60,6 +72,7 @@ class CK_rec(object):
                             velocity=message[2],
                             time=miditime))
                 self._activesense = 0
+                self.display.note_on(message[1])
             elif message[0] == 176:
                 self._track.append(Message(
                             "control_change",
@@ -74,6 +87,22 @@ class CK_rec(object):
                             velocity=message[2],
                             time=miditime))
                 self._activesense = 0
+                self.display.note_off(message[1])
+
+    def print_active_notes(self):
+        """Use the display to print the active notes.
+        """
+        self.display.print_line()
+
+    def print_display_footer(self):
+        """Print the footer of the display.
+        """
+        self.display.print_footer()
+
+    def update_display(self):
+        """Update the display to print the "on"-notes.
+        """
+        self.display.print_line()
 
     def saveTrack(self, name):
         """Save the recording as a midi track (.mid file extension)
