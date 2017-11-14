@@ -9,7 +9,9 @@ from CK_rec.rec_classes import CK_rec
 
 #get config
 config = configparser.ConfigParser()
-config.read("midirecorder_settings.ini")
+
+config.read('midirecorder_settings.ini')
+
 if (not config.has_section("midi_settings")):
     config.add_section('midi_settings')
 if (not config.has_section("outfile_settings")):
@@ -36,13 +38,14 @@ debug = recorder_settings.getboolean("debug", False)
 display_note_on_symbol = display_settings.get("note_on_symbol", "x")
 display_note_off_symbol = display_settings.get("note_off_symbol", " ")
 display_speed = display_speed_options.get(
-    display_settings.get("speed", "medium"))
+display_settings.get("speed", "medium"))
 
 # Start the Device
 codeK = Setup()
 codeK.print_welcome()
 try:
     myPort = int(midi_settings.get("port"))
+    # print(myPort)
 except (KeyError, TypeError) as e:
     myPort = codeK.perform_setup()
 
